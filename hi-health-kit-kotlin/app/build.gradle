@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        applicationId "com.sample.huawei.hihealth"
+        minSdkVersion 21 //actual 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        //  Для подписи можно использовать тот же сертификат что и в Google Play.
+        //  Однако если вы хотите избежать возможности кросс-обновлений из 2х магазинов,
+        //  лучше создать новый сертификат и подписать им
+        release {
+            storeFile file("HuaweiSampleKey.jks")
+            storePassword "HuaweiSampleKey"
+            keyAlias "HuaweiSampleKey"
+            keyPassword "HuaweiSampleKey"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+    buildTypes {
+        release {
+            debuggable true
+            minifyEnabled false
+            proguardFile 'proguard-project.txt'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    // Нужно добавить SHA256 сертификата которым вы подписываете приложение в вашем Web-интерфейсе
+    // Подробный гайд здесь: https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/iap-configuring-appGallery-connect
+
+    // Не забудьте включить соответствующие Kits в вашем Web-интерфейсе
+    // Подробный гайд здесь: https://developer.huawei.com/consumer/en/service/hms/catalog/AGCHelp.html?page=AGC_appGalleryConnect_associated_service
+    // После включения Kits и добавления SHA256, скачайте agconnect-services.json и положите его в проект
+
+    // Если Android studio не видит ваше Huawei устройство - переключите его в режим соединения MTP (передача файлов)
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+
+    //  Этот пример РАБОТАЕТ на всех смартфонах (не только Huawei и Honor)
+    //  Для корректной работы этого примера на устройстве должно быть установлено:
+    //  1. Приложение Huawei Health (10.1.2.513+ для поддержки фич из hms5)
+    //  2. Приложение Huawei Mobile Services
+    //  Все это можно установить из AppGallery которую можно скачать здесь:
+    //  https://consumer.huawei.com/ru/mobileservices/appgallery/?fromConsumer=en_homepage_AppGallery&gclid=Cj0KCQjw5eX7BRDQARIsAMhYLP83b5i1LZxCXwNcuvsfeGN8O0njeGZ_MvcaKtCfpqkmyStkUoD9J5QaAvaSEALw_wcB
+    implementation 'com.huawei.hihealth:hihealthkit:5.0.0.300'
+
+    // Подача заявки на использование HiHealth Kit:
+    // https://developer.huawei.com/consumer/en/doc/development/huaweihealth-Guides/applying-hihealth-0000001053630719
+    // Разрешение на чтение вам должны одобрить, разрешение на запись скорей всего нет
+
+    // Если вы используете proguard, правила можно скопировать из файла proguard-project.txt
+}
+
+//Huawei plugin
+apply plugin: 'com.huawei.agconnect'

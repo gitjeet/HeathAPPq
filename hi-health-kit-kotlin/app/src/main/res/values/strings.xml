@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">HMS HiHealthKit</string>
+    <string name="errorMessage">Something goes wrong, probably you haven\'t requested authorization yet. Or maybe you haven\'t allowed %1$s type of data</string>
+    <string name="request_Authorization">Request Authorization</string>
+    <string name="get_gender">Get gender</string>
+    <string name="get_steps">Get steps</string>
+    <string name="get_weight">Get weight</string>
+    <string name="day">Day</string>
+    <string name="week">Week</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="logo">logo</string>
+    <string name="steps">"Steps: %1$d"</string>
+    <string name="gender_female">Gender: Female</string>
+    <string name="gender_male">Gender: Male</string>
+    <string name="data_type_step_count">\"Step count\"</string>
+    <string name="data_type_basic_personal_inf">\"Basic personal information\"</string>
+    <string name="data_type_basic_measurement">\"Basic measurement\"</string>
+    <string name="weight">Weight: %1$.2f</string>
+    <string name="req_auth_success">Request Authorization success</string>
+    <string name="req_auth_failed">Request Authorization failed</string>
+    <string name="req_auth_param_invalid">Request Authorization failed due to invalid param</string>
+    <string name="req_auth_err_api_ex">Request Authorization failed due to api exception</string>
+    <string name="req_auth_err_perm_ex">Request Authorization failed due to permission exception</string>
+    <string name="req_auth_err_scope_ex">Request Authorization failed due to error scope exception</string>
+    <string name="req_auth_err_undefined">Undefined error</string>
+    <string name="gender_undefined">Gender: undefined</string>
+</resources>
